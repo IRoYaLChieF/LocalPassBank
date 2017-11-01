@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace LocalPassBank
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour LoginPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginPage : Page
     {
-        public MainWindow()
+        public LoginPage()
         {
             InitializeComponent();
-            MyWindowFrame.NavigationService.Navigate(new LoginPage());
         }
     }
 }

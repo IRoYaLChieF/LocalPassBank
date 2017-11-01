@@ -11,13 +11,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-            <views:LoginView DataContext="{Binding}"/>
-        </DataTemplate>
-    </Window.Resources>
-    <Grid>
-        <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding}"/>
-    </Grid>
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        WindowStartupLocation="CenterScreen">
+    <Frame x:Name="MyWindowFrame"/>
 </Window>
