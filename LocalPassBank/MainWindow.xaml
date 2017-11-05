@@ -1,4 +1,4 @@
-﻿<Window x:Class="LocalPassBank.MainWindow"
+﻿<NavigationWindow x:Class="LocalPassBank.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,6 +12,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        WindowStartupLocation="CenterScreen">
-    <Frame x:Name="MyWindowFrame"/>
-</Window>
+        WindowStartupLocation="CenterScreen"
+        Source="/Views/LoginPage.xaml"
+        ShowsNavigationUI="False">
+</NavigationWindow>

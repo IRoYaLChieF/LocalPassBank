@@ -12,17 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LocalPassBank.ViewModels;
 
-namespace LocalPassBank
+namespace LocalPassBank.Views
 {
     /// <summary>
     /// Logique d'interaction pour LoginPage.xaml
     /// </summary>
     public partial class LoginPage : Page
     {
-        public LoginPage()
+        private LoginViewModel loginViewModel;
+
+        public LoginPage(WindowViewModel windowViewModel)
         {
             InitializeComponent();
+            loginViewModel = new LoginViewModel(windowViewModel, PasswordPassBox);
+            DataContext = loginViewModel;
+            // Bind Command
+            RegisterButton.Command = loginViewModel.GoToRegistrationPage;
+            LoginButton.Command = loginViewModel.Login;
         }
     }
 }

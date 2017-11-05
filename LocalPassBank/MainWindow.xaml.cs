@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalPassBank.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,16 @@ namespace LocalPassBank
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : NavigationWindow
     {
+        private WindowViewModel windowViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
-            MyWindowFrame.NavigationService.Navigate(new LoginPage());
+            windowViewModel = new WindowViewModel(this);
+            DataContext = windowViewModel;
+            windowViewModel.GoToLoginPage();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Page x:Class="LocalPassBank.Views.LoginPage"
+﻿<Page x:Class="LocalPassBank.Views.RegistrationPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,29 +7,33 @@
       xmlns:viewmodels="clr-namespace:LocalPassBank.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="525"
-      Title="LocalPassBank - Connexion"
+      Title="LocalPassBank - Inscription"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Medium"
       TextElement.FontSize="14"
       FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
       ShowsNavigationUI="False">
     <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Content="Nom du compte"/>
-        <TextBox Text="{Binding NameInput, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="NameTextBox" Text="{Binding NameInput, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" Content="Mot de passe"/>
         <PasswordBox x:Name="PasswordPassBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Top"/>
-        <Button x:Name="RegisterButton" Grid.Column="0" Grid.Row="4" Margin="5,0,5,0" Content="S'inscrire"/>
-        <Button x:Name="LoginButton" Grid.Column="1" Grid.Row="4" Margin="5,0,5,0" Content="Connexion"/>
+        <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" Content="Validation du mot de passe"/>
+        <PasswordBox x:Name="RePasswordPassBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" VerticalAlignment="Top"/>
+        <Button x:Name="ReturnButton" Grid.Column="0" Grid.Row="6" Margin="5,0,5,0" Content="Se connecter"/>
+        <Button x:Name="RegistrationButton" Grid.Column="1" Grid.Row="6" Margin="5,0,5,0" Content="Inscription"/>
     </Grid>
 </Page>
