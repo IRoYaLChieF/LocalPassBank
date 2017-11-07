@@ -1,4 +1,6 @@
 ﻿using LocalPassBank.Data;
+using LocalPassBank.Views;
+using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -52,17 +54,17 @@ namespace LocalPassBank.ViewModels
             rePasswordInput.Password = String.Empty;
         }
 
-        private void RegisterCommand()
+        private async void RegisterCommand()
         {
             Accounts account = windowViewModel.Database.GetAccountByName(nameInput);
             if (account != null)
             {
-                MessageBox.Show("Ce nom de compte est déjà utilisé !", "Inscription" , MessageBoxButton.OK, MessageBoxImage.Error);
+                await DialogHost.Show(new SimpleDialog("Ce nom de compte est déjà utilisé !"), "RegistrationPageView");
                 return;
             }
             account = new Accounts(nameInput, Security.ComputeHash512(passwordInput.Password));
             windowViewModel.Database.AddAccount(account);
-            MessageBox.Show("Inscription réussie !", "Inscription", MessageBoxButton.OK, MessageBoxImage.Information);
+            await DialogHost.Show(new SimpleDialog("Inscription réussie !"), "RegistrationPageView");
             ClearAllInput();
             windowViewModel.GoToLoginPage();
         }

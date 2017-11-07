@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LocalPassBank.Views"
       xmlns:viewmodels="clr-namespace:LocalPassBank.ViewModels"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="525"
       Title="LocalPassBank - Connexion"
@@ -13,6 +14,7 @@
       TextElement.FontSize="14"
       FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
       ShowsNavigationUI="False">
+    <materialDesign:DialogHost Identifier="LoginPageView">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -32,4 +34,5 @@
         <Button x:Name="RegisterButton" Grid.Column="0" Grid.Row="4" Margin="5,0,5,0" Content="S'inscrire"/>
         <Button x:Name="LoginButton" Grid.Column="1" Grid.Row="4" Margin="5,0,5,0" Content="Connexion"/>
     </Grid>
+    </materialDesign:DialogHost>
 </Page>

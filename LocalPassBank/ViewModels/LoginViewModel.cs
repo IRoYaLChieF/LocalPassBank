@@ -10,6 +10,7 @@ using LocalPassBank.Views;
 using System.ComponentModel;
 using LocalPassBank.Data;
 using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace LocalPassBank.ViewModels
 {
@@ -52,21 +53,21 @@ namespace LocalPassBank.ViewModels
             return (true);
         }
 
-        private void LoginCommand()
+        private async void LoginCommand()
         {
             Accounts account = windowViewModel.Database.GetAccountByName(NameInput);
             if (account == null)
             {
-                MessageBox.Show("Nom de compte ou mot de passe incorrect !", "Connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+                await DialogHost.Show(new SimpleDialog("Nom de compte ou mot de passe incorrect !"), "LoginPageView");
                 return;
             }
             Byte[] password = Security.ComputeHash512(passwordInput.Password);
             if (!password.SequenceEqual(account.Password))
             {
-                MessageBox.Show("Nom de compte ou mot de passe incorrect !", "Connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+                await DialogHost.Show(new SimpleDialog("Nom de compte ou mot de passe incorrect !"), "LoginPageView");
                 return;
             }
-            MessageBox.Show("Connexion réussie !", "Connexion", MessageBoxButton.OK, MessageBoxImage.Information);
+            await DialogHost.Show(new SimpleDialog("Connexion réussie !"), "LoginPageView");
         }
 
         private void PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
