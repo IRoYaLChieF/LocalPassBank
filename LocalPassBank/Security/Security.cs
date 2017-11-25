@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
+using System.Windows;
 
 namespace LocalPassBank
 {
@@ -31,21 +32,18 @@ namespace LocalPassBank
 
         static public Byte[] Encryption(String str, Byte[] key)
         {
-            Byte[] iv = new Byte[32];
+            Byte[] data = Encoding.Unicode.GetBytes(str);
+            Byte[] iv = new Byte[16];
             RNGCryptoServiceProvider rngCrypto = new RNGCryptoServiceProvider();
             rngCrypto.GetBytes(iv);
             RijndaelManaged crypto = new RijndaelManaged()
             {
                 IV = iv,
-                Key = key,
-                BlockSize = 256,
-                Mode = CipherMode.CBC,
-                Padding = PaddingMode.ISO10126
+                Key = key
             };
-            ICryptoTransform encryptor = crypto.CreateEncryptor();
             MemoryStream memoryStream = new MemoryStream();
-            CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
-            cryptoStream.Write(Encoding.Unicode.GetBytes(str), 0, Encoding.Unicode.GetByteCount(str));
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, crypto.CreateEncryptor(), CryptoStreamMode.Write);
+            cryptoStream.Write(data, 0, data.Length);
             cryptoStream.FlushFinalBlock();
             Byte[] value = iv.Concat(memoryStream.ToArray()).ToArray();
             cryptoStream.Close();
@@ -55,24 +53,24 @@ namespace LocalPassBank
 
         static public String Decryption(Byte[] value, Byte[] key)
         {
-            Byte[] iv = value.Take(32).ToArray();
-            Byte[] toDecrypt = value.Skip(32).Take(value.Length - 32).ToArray();
+            if (value.Length == 0)
+                return (String.Empty);
+            Byte[] iv = value.Take(16).ToArray();
+            Byte[] toDecrypt = value.Skip(16).Take(value.Length - 16).ToArray();
             RijndaelManaged crypto = new RijndaelManaged()
             {
                 IV = iv,
-                Key = key,
-                BlockSize = 256,
-                Mode = CipherMode.CBC,
-                Padding = PaddingMode.ISO10126
+                Key = key
             };
-            ICryptoTransform decryptor = crypto.CreateDecryptor();
-            MemoryStream memoryStream = new MemoryStream(toDecrypt);
-            CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
-            Byte[] decryptedString = new Byte[toDecrypt.Length];
-            int decryptedByteCount = cryptoStream.Read(decryptedString, 0, decryptedString.Length);
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, crypto.CreateDecryptor(), CryptoStreamMode.Write);
+            cryptoStream.Write(toDecrypt, 0, toDecrypt.Length);
+            cryptoStream.FlushFinalBlock();
+            Byte[] decryptedString = memoryStream.ToArray();
             memoryStream.Close();
             cryptoStream.Close();
-            return (Encoding.Unicode.GetString(decryptedString, 0, decryptedByteCount));
+            String str = Encoding.Unicode.GetString(decryptedString);
+            return (str);
         }
     }
 }

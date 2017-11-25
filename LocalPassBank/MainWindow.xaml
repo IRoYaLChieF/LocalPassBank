@@ -13,6 +13,5 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         WindowStartupLocation="CenterScreen"
-        Source="/Views/LoginPage.xaml"
         ShowsNavigationUI="False">
 </NavigationWindow>

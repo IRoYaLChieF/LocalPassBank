@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalPassBank.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace LocalPassBank.Views
     /// </summary>
     public partial class PassBankPage : Page
     {
-        public PassBankPage()
+        private PassBankViewModel passBankViewModel;
+
+        public PassBankPage(WindowViewModel windowViewModel, int id, Byte[] key)
         {
             InitializeComponent();
+            passBankViewModel = new PassBankViewModel(windowViewModel, id, key);
+            DataContext = passBankViewModel;
         }
     }
 }

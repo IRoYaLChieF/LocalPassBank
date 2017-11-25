@@ -68,6 +68,7 @@ namespace LocalPassBank.ViewModels
                 return;
             }
             await DialogHost.Show(new SimpleDialog("Connexion réussie !"), "LoginPageView");
+            windowViewModel.GoToNewPassBankPage(account.Id, Security.ComputeHash256(passwordInput.Password));
         }
 
         private void PasswordChanged(object sender, System.Windows.RoutedEventArgs e)

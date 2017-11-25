@@ -47,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -105,8 +106,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Passwords.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Database.cs" />
+    <Compile Include="Models\PasswordInfo.cs" />
     <Compile Include="Security\Security.cs" />
+    <Compile Include="ViewModels\PassBankViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

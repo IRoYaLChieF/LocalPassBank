@@ -4,24 +4,45 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LocalPassBank.Views"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="LocalPassBank.Views.PassBankPage"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      x:Class="LocalPassBank.Views.PassBankPage"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="PassBankPage"
+      d:DesignHeight="350" d:DesignWidth="525"
+      Title="LocalPassBank"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Medium"
+      TextElement.FontSize="14"
+      FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+      ShowsNavigationUI="False"
       Background="White">
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-
-    </Grid>
+    <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuButton, Path=IsChecked}">
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <StackPanel>
+                <ToggleButton IsChecked="{Binding ElementName=MenuButton, Path=IsChecked}" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="Mon compte"/>
+            </StackPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton Grid.Row="0"  Grid.Column="0" x:Name="MenuButton" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding PasswordsInfo}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding KeyWord}" Header="Mot clef"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Description"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Grid.Row="2" Grid.Column="0" Margin="10" Content="Ajouter" Width="150" Command="{Binding AddPassword}"/>
+            <Button Grid.Row="2" Grid.Column="1" Margin="10" Content="Ouvrir" Width="150"/>
+        </Grid>
+    </materialDesign:DrawerHost>
 </Page>

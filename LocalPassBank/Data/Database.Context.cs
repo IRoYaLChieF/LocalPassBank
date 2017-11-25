@@ -26,5 +26,6 @@ namespace LocalPassBank.Data
         }
     
         public virtual DbSet<Accounts> Accounts { get; set; }
+        public virtual DbSet<Passwords> Passwords { get; set; }
     }
 }

@@ -11,16 +11,16 @@ namespace LocalPassBank.Data
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Accounts
     {
-        [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public byte[] Password { get; set; }
 
         public Accounts()
         {
+
         }
 
         public Accounts(String name, Byte[] password)

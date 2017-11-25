@@ -1,4 +1,5 @@
 ﻿using LocalPassBank.Models;
+using LocalPassBank.Views;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,29 +14,23 @@ namespace LocalPassBank.ViewModels
     public class WindowViewModel
     {
         private Page loginPage;
-        public Page LoginPage
-        {
-            get { return (loginPage); }
-        }
+        public Page LoginPage => (loginPage);
 
         private Page registrationPage;
-        public Page RegistrationPage
-        {
-            get { return (registrationPage); }
-        }
+        public Page RegistrationPage => (registrationPage);
+
+        private Page passBankPage;
+        public Page PassBankPage => (passBankPage);
 
         private Database database;
-        public Database Database
-        {
-            get { return(database); }
-        }
+        public Database Database => (database);
 
         private MainWindow window;
 
         public WindowViewModel(MainWindow window)
         {
-            loginPage = new Views.LoginPage(this);
-            registrationPage = new Views.RegistrationPage(this);
+            loginPage = new LoginPage(this);
+            registrationPage = new RegistrationPage(this);
             database = new Database();
             this.window = window;
         }
@@ -48,6 +43,12 @@ namespace LocalPassBank.ViewModels
         public void GoToRegistrationPage()
         {
             window.Navigate(registrationPage);
+        }
+
+        public void GoToNewPassBankPage(int id, Byte[] key)
+        {
+            passBankPage = new PassBankPage(this, id, key);
+            window.Navigate(passBankPage);
         }
     }
 }

@@ -25,18 +25,15 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Content="Nom du compte"/>
-            <TextBox x:Name="NameTextBox" Text="{Binding NameInput, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top"/>
-            <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" Content="Mot de passe"/>
-            <PasswordBox x:Name="PasswordPassBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Top"/>
-            <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" Content="Validation du mot de passe"/>
-            <PasswordBox x:Name="RePasswordPassBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" VerticalAlignment="Top"/>
-            <Button x:Name="ReturnButton" Grid.Column="0" Grid.Row="6" Margin="5,0,5,0" Content="Se connecter"/>
-            <Button x:Name="RegistrationButton" Grid.Column="1" Grid.Row="6" Margin="5,0,5,0" Content="Inscription"/>
+            <TextBox x:Name="NameTextBox" Text="{Binding NameInput, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center"
+                     materialDesign:HintAssist.Hint="Nom de compte" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <PasswordBox x:Name="PasswordPassBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center"
+                         materialDesign:HintAssist.Hint="Mot de passe" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+            <PasswordBox x:Name="RePasswordPassBox" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center"
+                         materialDesign:HintAssist.Hint="Confirmation du mot de passe" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+            <Button x:Name="ReturnButton" Grid.Column="0" Grid.Row="3" Margin="5,0,5,0" Content="Se connecter" Width="150"/>
+            <Button x:Name="RegistrationButton" Grid.Column="1" Grid.Row="3" Margin="5,0,5,0" Content="Inscription" Width="150"/>
         </Grid>
     </materialDesign:DialogHost>
 </Page>

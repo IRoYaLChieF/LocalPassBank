@@ -36,7 +36,7 @@ namespace LocalPassBank.Models
             return (null);
         }
 
-        public int GetNextId()
+        public int GetNextAccountId()
         {
             int id;
             try
@@ -50,10 +50,51 @@ namespace LocalPassBank.Models
             }
         }
 
+        public int GetNextPasswordId()
+        {
+            int id;
+            try
+            {
+                id = database.Passwords.Max((acc) => acc.Id);
+                return (id + 1);
+            }
+            catch
+            {
+                return (0);
+            }
+        }
+
         public void AddAccount(Accounts account)
         {
-            account.Id = GetNextId();
+            account.Id = GetNextAccountId();
             database.Accounts.Add(account);
+            database.SaveChanges();
+        }
+
+        public PasswordInfo[] GetPasswordInfoFromId(int id, Byte[] key)
+        {
+            var array = database.Passwords.Where(x => x.AccountId == id)
+                .Select(x => new
+                {
+                    KeyWord = x.KeyWord,
+                    Description = x.Description
+                }).AsEnumerable()
+                .Select(x => new PasswordInfo(x.KeyWord, x.Description, key));
+            return (array.ToArray());
+        }
+
+        public void AddPassword(int id, Byte[] keyWord, Byte[] description, Byte[] login, Byte[] password)
+        {
+            Passwords pass = new Passwords()
+            {
+                Id = GetNextPasswordId(),
+                AccountId = id,
+                KeyWord = keyWord,
+                Description = description,
+                Login = login,
+                Password = password
+            };
+            database.Passwords.Add(pass);
             database.SaveChanges();
         }
     }

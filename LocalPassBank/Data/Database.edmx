@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,11 +13,22 @@
           <Property Name="Name" Type="varchar(max)" Nullable="false" />
           <Property Name="Password" Type="varbinary(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Passwords">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="KeyWord" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Description" Type="varbinary(max)" />
+          <Property Name="Login" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Password" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="DatabaseModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passwords" EntityType="Self.Passwords" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -31,7 +42,19 @@
         </EntityType>
         <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="Passwords" EntityType="DatabaseModel.Passwords" />
         </EntityContainer>
+        <EntityType Name="Passwords">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="KeyWord" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Login" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Password" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -44,6 +67,18 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passwords">
+            <EntityTypeMapping TypeName="DatabaseModel.Passwords">
+              <MappingFragment StoreEntitySet="Passwords">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -61,7 +96,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
